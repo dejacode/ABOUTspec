@@ -11,7 +11,7 @@
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width" />
 
-  <title>ABOUT file specification v0.6.1</title>
+  <title>ABOUT file specification v0.7.0</title>
   <meta name="Description" content="The purpose of an ABOUT file is to provide a simple way to document the provenance (origin and license) and other important or interesting information about a software component."/>
   <meta name="keywords" content="DejaCode.org, automated compliance, ABOUT file, manage open source requirements, license requirements, DejaCode, document provenance, origin and license of software components, origin and license tools" />
   <!-- Included CSS Files (Uncompressed) -->
@@ -36,7 +36,7 @@
   <div class="row">
     <div class="twelve columns">
 
-      <h2>ABOUT File Specification v0.6.1</h2>
+      <h2>ABOUT File Specification v0.7.0</h2>
       <hr />
     </div>
   </div>
@@ -189,19 +189,18 @@ description: This is a long description for a
     </li>
     </ul>
     <p>
-      Alternatively an ABOUT file may contain the &quot;about_file&quot; field that contains a POSIX path to the file it
+      In addition, an ABOUT file must contain the &quot;about_resource&quot; field that contains a POSIX path to the file it
       documents. This path is relative to the path of the ABOUT file.
     </p>
     <p>
-      For instance, a file named django.ABOUT may contain the following field to provide documentation about the
+      For instance, a file named django-1.2.3.tar.gz.ABOUT may contain the following field to provide documentation about the
       django-1.2.3.tar.gz file stored in the same folder:
     </p>
     <pre>
-      about_file: django-1.2.3.tar.gz
+      about_resource: django-1.2.3.tar.gz
     </pre>
     <p>
-      The about_file field is optional and, if present, takes precedence over a file possibly pointed to by the ABOUT
-      file name itself. This field can appear only once in the file.
+      The about_resource field is mandatory, and it can appear only once in the file.
     </p>
 
     <h3>
@@ -264,6 +263,7 @@ description: This is a long description for a
       hash from a version control system (for a snapshot checked out from SCMs such as Subversion or Git). If not
       available, the version should be the date the component was provisioned, in a format such as 'YYYY-MM-DD'.
     </li>
+    <li>about_resource: The name of the file or folder that the ABOUT file documents.</li>
     </ul>
 
 
@@ -520,16 +520,18 @@ description: This is a long description for a
 
     <h3>
       Changes
-	</h3>
-	<ul>
-	<li>
-		2013.02.19: Add Changes section. 
-					Remove ability to reference files inside an archive.
-	</li>
-	<li>
-		2013.02.22: Multiple text clarifications throughout the specification.
-	</li>
-	</ul>
+    </h3>
+    <ul>
+    <li>
+        2013.02.19: Add Changes section. Remove ability to reference files inside an archive.
+    </li>
+    <li>
+        2013.02.22: Multiple text clarifications throughout the specification.
+    </li>
+    <li>
+        2013.05.03: Renamed about_file to about_resource, and also made about_resource a mandatory field.
+    </li>
+    </ul>
 
         <div id="disqus_thread" >
           <script type="text/javascript">
