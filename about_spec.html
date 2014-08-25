@@ -11,7 +11,7 @@
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width" />
 
-  <title>ABOUT file specification v0.5.1</title>
+  <title>ABOUT file specification v0.6.0</title>
 
   <!-- Included CSS Files (Uncompressed) -->
   <!--
@@ -35,7 +35,7 @@
   <div class="row">
     <div class="twelve columns">
 
-      <h2>ABOUT File Specification v0.5.1</h2>
+      <h2>ABOUT File Specification v0.6.0</h2>
       <hr />
     </div>
   </div>
@@ -52,14 +52,14 @@
       Purpose
     </h2>
     <p>
-      The purpose of an ABOUT file is to provide a minimalist and simple way to document the provenance (origin and
+      The purpose of an ABOUT file is to provide a simple way to document the provenance (origin and
       license) and other important or interesting information about a software component. An ABOUT file is a small text
-      file stored in the codebase side-by-side with the software component it documents. No modification of the
+      file stored in the codebase side-by-side with the software component that it documents. No modification of the
       documented software is needed. The format is plain text with name/value pairs separated by a colon and simple
-      conventions. It is easy to read and create by hand and is designed first for humans, not for machines. The format
-      is well-defined and structured just enough to make it easy to process with software too. It contains enough
-      information to fulfill key license requirements such as creating credits or attribution notices and collect
-      redistributable source code or get informed about new versions of a software component.
+      conventions. It is easy to read and create by hand and is designed first for humans, rather than machines. The format
+      is well-defined and structured just enough to make it easy to process with software as well. It contains enough
+      information to fulfill key license requirements such as creating credits or attribution notices, collecting
+      redistributable source code, or providing information about new versions of a software component.
     </p>
     <h2>
       Getting Started
@@ -87,10 +87,13 @@
       httpd-2.4.3.tar.gz. 
       </li>
       <li>
-      The name of this component is &quot;Apache HTTP Server&quot; and it's version is &quot;2.4.3&quot;.
+      The name of this component is &quot;Apache HTTP Server&quot; and its version is &quot;2.4.3&quot;.
       </li>
       <li>
-      The home URL for this component is &quot;http://httpd.apache.org&quot;.
+      The home URL for this component is 
+		  <a href="http://httpd.apache.org"> 
+		  http://httpd.apache.org 
+		  </a> 
       </li>
       <li>
       The file httpd-2.4.3.tar.gz was originally downloaded from 
@@ -107,7 +110,7 @@
       Specification
     </h2>
     <p>
-      The format of an ABOUT file format is simple: lines of colon-separated name:values pairs. It is loosely based
+      The format of an ABOUT file format is simple: lines of colon-separated name:value pairs. It is loosely based
       on the Email header field format as specified in RFC5322 at
       <a href="http://tools.ietf.org/html/rfc5322">
         http://tools.ietf.org/html/rfc5322
@@ -118,8 +121,13 @@
       Field names syntax
     </h3>
     <p>
-      Field names can contain only these US-ASCII characters: digits from 0 to 9, uppercase and lowercase letters from A
-      to Z and the &quot;_&quot; underscore sign. The formal lexical definition is: 
+      Field names can contain only these US-ASCII characters: 
+      <li> digits from 0 to 9 </li>
+      <li> uppercase and lowercase letters from A to Z and a to z </li>
+      <li> the &quot;_&quot; underscore sign. </li>
+    </p>
+    </p>
+      The formal lexical definition is: 
     </p>
       <pre>
       field_name ::=  (letter|"_") (letter | digit | "_")*
@@ -136,8 +144,8 @@
       Fields are mandatory, optional, extensions or ignored.
     </h3>
     <p>
-      As defined in this specification, a field can be mandatory, optional or ignored. Ignored fields are fields with a
-      name that is not defined in this specification. Custom extensions are also supported and must be processed by
+      As defined in this specification, a field can be mandatory, optional or ignored. An ignored field is a field with a
+      name that is not defined in this specification. Custom extensions are also supported and are processed by
       tools as ignored fields unless you have built a custom tool to understand and process these extensions.
     </p>
 
@@ -151,7 +159,7 @@
       </a>
     </p>
     <p>
-      For instance, a field body can contain multiple lines and space folding applies. In this example the description is one
+      For instance, a field body can contain multiple lines; space folding applies. In this example the description is one
       logical line:
     </p>
     <pre>
@@ -163,19 +171,19 @@ description: This is a long description for a
       Referencing the file or folder documented by an ABOUT file.
     </h3>
     <p>
-      An ABOUT file documents one file or folder. By convention, an ABOUT file is stored in the same folder as the file or folder it documents.
-      An ABOUT file is named after the file or folder it documents adding a &quot;.ABOUT&quot; extension.
+      An ABOUT file documents one file or folder. By convention, you store an ABOUT file in the same folder as the file or folder that it documents.
+      To name an ABOUT file, simply append the &quot;.ABOUT&quot; extension to the name of the file or folder that it documents.
     </p>
     <p>
       For instance:
     </p>
     <ul>
     <li>
-      a file named linux-3.7-rc7.tar.bz2.ABOUT provides documentation about the linux-3.7-rc7.tar.bz2 file
+      A file named linux-3.7-rc7.tar.bz2.ABOUT provides documentation about the linux-3.7-rc7.tar.bz2 file
       stored in the same folder.
     </li>
     <li>
-      a file named nodejs.ABOUT provides documentation about the nodejs folder stored side by side with the
+      A file named nodejs.ABOUT provides documentation about the nodejs folder stored side by side with the
       nodejs.ABOUT file.
     </li>
     </ul>
@@ -191,28 +199,28 @@ description: This is a long description for a
       about_file: django-1.2.3.tar.gz
     </pre>
     <p>
-      The about_file field is optional and if present, it takes precedence over a file possibly pointed to by the ABOUT
-      file name itself. This field can appear only once.
+      The about_file field is optional and, if present, takes precedence over a file possibly pointed to by the ABOUT
+      file name itself. This field can appear only once in the file.
     </p>
 
     <h3>
       Fields validation
     </h3>
     <p>
-      When a tool processes an ABOUT file it must produce a warning or error if a field is invalid. A field can be
-      invalid for several reason such as an invalid syntax or an invalid content. Tools should report details on the
-      nature of the error. The validation process should check that each field name and values are syntactically correct
-      and contain correct values according to its (terse but common sense) definition in this specification. Certain
-      fields may be used for additional specific validations (such as extensions for checksums verification, URL
-      validity, path pointing to an existing text file, etc). Ignored fields should trigger a warning.
+      When a tool processes an ABOUT file, it must produce a warning or error if a field is invalid. A field can be
+      invalid for several reasons, such as an invalid syntax or an invalid content. A tool should report details on the
+      nature of the error. The validation process should check that each field name:value pair is syntactically correct and that 
+      it contains correct values according to its concise, common sense definition in this specification. Certain
+      fields may be used for additional specific validations (such as extensions for checksum verification, URL
+      validity, path pointer to an existing text file, and so forth). Ignored fields should trigger a warning.
     </p>
     <p>
       The field order does not matter with the following exception: multiple occurrences of a field name are possible and
       must be interpreted such that only the last occurrence is considered as the value for this field name. Previous
-      occurrences must be treated as ignored fields.
+      occurrences in the same file must be treated as ignored fields.
     </p>
     <p>
-      Tools processing an ABOUT file must issue a warning when a field name occurs more than once in an ABOUT file (as
+      A tool processing an ABOUT file must issue a warning when a field name occurs more than once in an ABOUT file (as
       for any other ignored field).
     </p>
 
@@ -232,61 +240,28 @@ description: This is a long description for a
     </pre>
     <p>
       The body of a field may reference URLs such as a homepage or a download. In this case the field name is suffixed
-      with &quot;_url&quot; and the field body must be a valid absolute URL. For instance the download URL is
+      with &quot;_url&quot; and the field body must be a valid absolute URL. For instance, a download URL is
       referenced this way:
     </p>
     <pre>
       download_url: http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.4.20.tar.bz2
     </pre>
 
-    <h3>
-      Fields referencing files inside archives
-    </h2>
-    <p>
-      To document files stored in an existing archive without needing to modify this archive, file-related fields can
-      point to files stored inside an archive. (Suffixed fields with &quot;_file&quot;). The field body is a POSIX
-      path to the archive file and the path to the file inside the archive. To address the file inside an archive, use
-      the path as listed by the extracting tool commonly used to extract this archive type. This type of reference can
-      be used for any &quot;_file&quot;-suffixed field, including the &quot;about_file&quot; field.
-    </p>
-    <p>
-      For instance compressed Tar archives are commonly extracted with GNU Tar and the archive file listing is obtained
-      this way:
-    </p>
-    <pre>
-      $ tar -tzf httpd-2.4.3.tar.gz
-      httpd-2.4.3/
-      httpd-2.4.3/CHANGES
-      httpd-2.4.3/httpd.dsp
-      httpd-2.4.3/LICENSE
-      httpd-2.4.3/Makefile.in
-      httpd-2.4.3/NOTICE
-      httpd-2.4.3/README
-      .....
-    </pre>
-    <p>
-      Here the ABOUT file httpd-2.4.3.tar.gz.ABOUT could contain these fields to reference the existing LICENSE and
-      NOTICE files provided in the archive:
-    </p>
-    <pre>
-      license_text_file: httpd-2.4.3.tar.gz/httpd-2.4.3/LICENSE
-      notice_file: httpd-2.4.3.tar.gz/httpd-2.4.3/NOTICE
-    </pre>
 
     <h3>
       Mandatory fields
     </h3>
     <p>
-      When a tool processes an ABOUT file it must issue an error if these fields are missing.
+      When a tool processes an ABOUT file, it must issue an error if a mandatory field is missing.
     </p>
     <ul>
     <li>
-      name: The name for the component
+      name: Component name. 
     </li>
     <li>
-      version: The component version. Most components have a version. A version identifier can be a revision or
+      version: Component version. A component usually has a version, such as a revision number or
       hash from a version control system (for a snapshot checked out from SCMs such as Subversion or Git). If not
-      available, the version should be the date the component was provisioned in ISO-like format as 'YYYY-MM-DD'.
+      available, the version should be the date the component was provisioned, in a format such as 'YYYY-MM-DD'.
     </li>
     </ul>
 
@@ -296,15 +271,16 @@ description: This is a long description for a
     </h3>
     <ul>
     <li>
-      about_format: This defines the ABOUT file format specification used and is provided as hint to readers and
-      tools in order to support future versions of this specification. Default value is 1.0 if omitted.
+      about_format: The default value is 1.0. This defines the ABOUT file format specification  
+      and is provided as a hint to readers and
+      tools in order to support future versions of this specification.
     </li>
     <li>
-      date: the date when this ABOUT file was created or when the fields values were valid (for instance the
-      date when URLs were valid)
+      date: The date ('YYYY-MM-DD') when this ABOUT file was created or last validated (such as the date 
+      when the URLs were verified).
     </li>
     <li>
-      description: A description for this component.
+      description: Component description.
     </li>
     <li>
       home_url: URL to the homepage for this component.
@@ -313,83 +289,100 @@ description: This is a long description for a
       download_url: A direct URL to download the original file documented by this ABOUT file.
     </li>
     <li>
-      readme: Readme information for this component. You may use readme_file when this is a long text or a
-      pre-existing file as README files are commonly found in code archives.
+      readme: Readme (README) information for the component, usually a relatively short amount of text.
     </li>
     <li>
-      install: Installation information for this component. You may use install_file when this is a long text or
-      a pre-existing file as INSTALL files are commonly found in code archives.
+      readme_file: The name of a readme (README) text file associated with the component. 
     </li>
     <li>
-      changelog: Changelog text for this component. You may use changelog_file when this is a long text or a
-      pre-existing file as CHANGELOG files are commonly found in code archives.
+      install: Installation information for the component, usually a relatively short amount of text.
     </li>
     <li>
-      news: News text for this component. You may use news_file when this is a long text or a pre-existing file
-      as NEWS files are commonly found in code archives. You may use news_url to point to an internet news feed for this
-      component.
+      install_file: The name of an install (INSTALL) text file associated with the component.
     </li>
     <li>
-      notes: Your notes and comments about this component.
+      changelog: Changelog text for the component, usually a relatively short amount of text.
     </li>
     <li>
-      usage: Describe the intended usage for this component. Possible values are limited to &quot;internal,
-      product and tool&quot; each with the following definitions:
+      changelog_file: The name of a changelog (CHANGELOG) text file associated with the component.
+    </li>
+    <li>
+      news: News text for the component, usually a relatively short amount of text.
+    </li>
+    <li>
+      news_file: The name of a news (NEWS) text file associated with the component.
+    </li>
+    <li>
+      news_url: A URL that provides an internet news feed for the component.
+    </li>
+    <li>
+      notes: Notes and comments about the component, in addition to those already provided in the 
+      description field. 
+    </li>
+    <li>
+      usage: A concise description of the intended usage for the component. Suggested values include:
       <ul>
 	    <li>
-	      internal: used only internally, not part of the distributed software that uses this component.
+	      internal
 	    </li>
 	    <li>
-	      product: used in the distributed software.
+	      product
 	    </li>
 	    <li>
-	      tool: tool used for development, not part of the distributed software.
+	      tool
 	    </li>
 	  </ul>
     </li>
     </ul>
 
     <h3>
-      Optional authors and licensing fields
+      Optional Author and Licensing fields
     </h3>
 
     <ul>
     <li>
-      contact: Contact information (such as an email address or physical address) for the component providers.
+      contact: Contact information (such as an email address or physical address) for the component provider.
     </li>
     <li>
-      organization: The name of the primary organizations or persons that authored or provided this component.
+      organization: The name of the primary organization or persons that authored or provided the component.
     </li>
     <li>
-      copyright: Copyright statement for this component. You may use copyright_file when this is a long text or
-      to reference a pre-existing file. For instance COPYRIGHT files are commonly found in code archives.
+      copyright: Copyright statement for the component, usually a relatively short amount of text.
     </li>
     <li>
-      notice: Text containing a legal notice for this component. You may use notice_file when this is a long
-      text or to reference a pre-existing file. For instance NOTICE files are commonly found in code archives.
+      copyright_file: The name of a copyright (COPYRIGHT) file associated with the component.
     </li>
     <li>
-      notice_url: URL to a legal notice for this component.
+      notice: Legal notice for the component, usually a relatively short amount of text.
     </li>
     <li>
-      license_text: License text for this component. You may use license_text_file when this is a long text or
-      to reference a pre-existing file. For instance LICENSE or COPYING files are commonly found in code archives.
+      notice_file: The name of a legal notice (NOTICE) file associated with the component.
     </li>
     <li>
-      license_url: URL to the license text for this component.
+      notice_url: URL to a legal notice for the component.
+    </li>
+    <li>
+      license_text: License text that applies to the component, usually for relatively simple license text.
+    </li>
+    <li>
+      license_text_file: The name of a license file (for example, a LICENSE or COPYING file in the component 
+      archive) that applies to the component.
+    </li>
+    <li>
+      license_url: URL to the license text for the component.
     </li>
     <li>
       license_spdx: The SPDX license short form identifiers for the license of this component. See
       <a href="http://spdx.org/licenses/">
         http://spdx.org/licenses/
       </a>
-      for details. You can separate each identifier with an &quot; or &quot; and &quot; and &quot; as defined in the
+      for details. You can separate each identifier using &quot; or &quot; and &quot; and &quot; as defined in the
       SPDX specification 1.1 to document the relationship between multiple license identifiers, such as a choice of
       license.
     </li>
     <li>
-      redistribute_sources: yes or no. Defaults to no if not present. Describes if this component license
-      requires redistribution in source form.
+      redistribute_sources: yes or no. Defaults to no. Set this to yes if the component license
+      requires code redistribution in source form.
     </li>
     </ul>
 
@@ -402,20 +395,20 @@ description: This is a long description for a
       these extensions. Other tools will ignore these extensions.
     </p>
     <p>
-      Some basic extensions are provided here too.
+      Some basic extensions are provided here as well.
     </p>
 
 
     <h3>
-      Optional Extension fields to reference files stored in version control system
+      Optional Extension fields to reference files stored in a version control system
     </h3>
     <p>
-      These fields provide a simple way to reference files stored in versions control system. There is a large number
-      of version control tools such as CVS, Subversion, Git, ClearCase or GNU Arch and addressing accurately a file or
-      folder revision in each of these tool in a uniform way is not an easy task. Some tool may require access control
-      with user/password or certificates and typically this information should not be stored in the ABOUT files. The
-      proposed approach is to define the &quot;scm_&quot; extension prefix and a few common fields to handle the
-      diversity of SCM tools ways to reference files:
+      These fields provide a simple way to reference files stored in a version control system. There are a large number
+      of version control tools such as CVS, Subversion, Git, ClearCase and GNU Arch. Accurate addressing of a file or
+      folder revision in each version control tool in a uniform way may not be possible. Some tools may require access control
+      via user/password or certificate; this information should not be stored in an ABOUT file. The
+      suggested approach is to define the &quot;scm_&quot; extension prefix and a few common fields to handle the
+      diversity of ways that SCM tools reference files:
     </p>
     <ul>
     <li>
@@ -426,20 +419,20 @@ description: This is a long description for a
       or file, such as an SVN or Git repository URL.
     </li>
     <li>
-      scm_path: Path to a file, folder or module used by certain SCM pointing inside a repository.
+      scm_path: Path used by a particular SCM to point to a file, folder or module inside a repository.
     </li>
     <li>
-      scm_tag: tag name or path used by certain SCM.
+      scm_tag: tag name or path used by a particular SCM.
     </li>
     <li>
-      scm_branch: branch name or path used by certain SCM.
+      scm_branch: branch name or path used by a particular SCM.
     </li>
     <li>
       scm_rev: revision identifier such as a revision hash or version number.
     </li>
     </ul>
     <p>
-      Some examples:
+      Some scm_* examples:
     </p>
     <pre>
       scm_tool: svn
@@ -462,12 +455,12 @@ description: This is a long description for a
     </h3>
     <p>
       These fields support checksums (such as SHA1) and signatures (such as GPG) commonly provided with downloadable
-      archives to verify their integrity. Tools could optionally use these to verify the integrity of a file documented
+      archives to verify their integrity. A tool could optionally use these to verify the integrity of a file documented
       by an ABOUT file.
     </p>
     <p>
-      The approach is to define the &quot;checksum_&quot; and &quot;signature_&quot; extensions prefix padded with
-      an identifier for each type of signature or checksum such as in &quot;scm_sha1&quot;.
+      The approach is to define &quot;checksum_&quot; and &quot;signature_&quot; extension prefixes padded with
+      an identifier for each type of signature or checksum such as &quot;checksum_sha1&quot;.
     </p>
     <ul>
     <li>
@@ -510,20 +503,32 @@ description: This is a long description for a
       Optional Extension fields for DejaCode
     </h3>
     <p>
-      These fields allow referencing DejaCode Enterprise objects with their URNs.
+      These fields provide a reference to DejaCode Enterprise objects via URN.
     </p>
     <ul>
     <li>
-      dje_component: The DejaCode Enterprise URN for this component.
+      dje_component: The DejaCode Enterprise URN for the component.
     </li>
     <li>
-      dje_license: The DejaCode Enterprise URNs of the licenses for this component.
+      dje_license: The DejaCode Enterprise URNs of the licenses for the component.
     </li>
     <li>
-      dje_organization: The DejaCode Enterprise URN for this component organization.
+      dje_organization: The DejaCode Enterprise URN for the component organization.
     </li>
     </ul>
 
+    <h3>
+      Changes
+	</h3>
+	<ul>
+	<li>
+		2013.02.19: Add Changes section. 
+					Remove ability to reference files inside an archive.
+	</li>
+	<li>
+		2013.02.22: Multiple text clarifications throughout the specification.
+	</li>
+	</ul>
 
         <div id="disqus_thread" >
           <script type="text/javascript">
