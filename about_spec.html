@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+  <meta charset="utf-8" />
+
+  <!-- Set the viewport width to device width for mobile -->
+  <meta name="viewport" content="width=device-width" />
+
+  <title>ABOUT file specification v0.5.0</title>
+
+  <!-- Included CSS Files (Uncompressed) -->
+  <!--
+  <link rel="stylesheet" href="stylesheets/foundation.css">
+  -->
+  
+  <!-- Included CSS Files (Compressed) -->
+  <link rel="stylesheet" href="stylesheets/foundation.css">
+  <link rel="stylesheet" href="stylesheets/app.css">
+  <link href='http://fonts.googleapis.com/css?family=Lato|Open+Sans:400,300' rel='stylesheet' type='text/css'>
+
+  <script src="javascripts/modernizr.foundation.js"></script>
+</head>
+<body>
+  <!-- Nav Bar -->
+  <div class="row">
+  	<div class="five columns">
+      <h1><a href="index.html"><img src="images/dejacodeorg-logo.png" alt="dejacode.org"/></a></h1>
+  	</div>
+
+  <div class="row">
+    <div class="twelve columns">
+
+      <h2>&nbsp;ABOUT File Specification v0.5.0</h2>
+      <hr />
+    </div>
+  </div>
+
+  <!-- End Nav -->
+
+
+  <!-- Main Page Content and Sidebar -->
+
+  <div class="row">
+
+    <div class="nine columns" role="content">
+    <h2>
+      Purpose
+    </h2>
+    <p>
+      The purpose of an ABOUT file is to provide a minimalist and simple way to document the provenance (origin and
+      license) and other important or interesting information about a software component. An ABOUT file is a small text
+      file stored in the codebase side-by-side with the software component it documents. No modification of the
+      documented software is needed. The format is plain text with name/value pairs separated by a colon and simple
+      conventions. It is easy to read and create by hand and is designed first for humans, not for machines. The format
+      is well-defined and structured just enough to make it easy to process with software too. It contains enough
+      information to fulfill key license requirements such as creating credits or attribution notices and collect
+      redistributable source code or get informed about new versions of a software component.
+    </p>
+    <h2>
+      Getting Started
+    </h2>
+    <p>
+      A simple and valid ABOUT file named httpd-2.4.3.tar.gz.ABOUT may look like this:
+    </p>
+    <pre>
+      name: Apache HTTP Server
+      home_url: http://httpd.apache.org
+      download_url: http://archive.apache.org/dist/httpd/httpd-2.4.3.tar.gz
+      version: 2.4.3
+      date: 2012-08-21
+      license_spdx: Apache-2.0
+      license_text_file: httpd.LICENSE
+      copyright: Copyright 2012 The Apache Software Foundation.
+      notice_file: httpd.NOTICE
+    </pre>
+    <p>
+      The meaning of this file is:
+    </p>
+    <ul>
+      <li>This ABOUT file documents the file httpd-2.4.3.tar.gz, because the ABOUT file name is
+      httpd-2.4.3.tar.gz.ABOUT. The file httpd-2.4.3.tar.gz.ABOUT is stored in the same folder as the documented file 
+      httpd-2.4.3.tar.gz. 
+      </li>
+      <li>
+      The name of this component is &quot;Apache HTTP Server&quot; and it's version is &quot;2.4.3&quot;.
+      </li>
+      <li>
+      The home URL for this component is &quot;http://httpd.apache.org&quot;.
+      </li>
+      <li>
+      The file httpd-2.4.3.tar.gz was originally downloaded from 
+      <a href="http://archive.apache.org/dist/httpd/httpd-2.4.3.tar.gz">
+        http://archive.apache.org/dist/httpd/httpd-2.4.3.tar.gz
+      </a>
+      </li>
+      <li>
+      In the same folder, there is a file named httpd.LICENSE that contains the license text for this component.
+      and a file named httpd.NOTICE that contains the notice text for this component.
+      </li>
+    </ul>
+    <h2>
+      Specification
+    </h2>
+    <p>
+      The format of an ABOUT file format is simple: lines of colon-separated name:values pairs. It is loosely based
+      on the Email header field format as specified in RFC5322 at
+      <a href="http://tools.ietf.org/html/rfc5322">
+        http://tools.ietf.org/html/rfc5322
+      </a>. This provides a convenient and well-defined specification and there are many available tools and
+      libraries that can parse and interpret this format. An ABOUT file content is encoded as UTF-8.
+    </p>
+    <h3>
+      Field names syntax
+    </h3>
+    <p>
+      Field names can contain only these US-ASCII characters: digits from 0 to 9, uppercase and lowercase letters from A
+      to Z and the &quot;_&quot; underscore sign. The formal lexical definition is: 
+    </p>
+      <pre>
+      field_name ::=  (letter|"_") (letter | digit | "_")*
+      letter     ::=  lowercase | uppercase
+      lowercase  ::=  "a"..."z"
+      uppercase  ::=  "A"..."Z"
+      digit      ::=  "0"..."9"
+      </pre>
+    <p>
+      The case of a field name is not significant such that URL and url are the same field name.
+    </p>
+
+    <h3>
+      Fields are mandatory, optional, extensions or ignored.
+    </h3>
+    <p>
+      As defined in this specification, a field can be mandatory, optional or ignored. Ignored fields are fields with a
+      name that is not defined in this specification. Custom extensions are also supported and must be processed by
+      tools as ignored fields unless you have built a custom tool to understand and process these extensions.
+    </p>
+
+    <h3>
+      Field body
+    </h3>
+    <p>
+      The body of a field and its encoding are defined according to the RFC5322 Email header specification Section 2.2
+      <a href="http://tools.ietf.org/html/rfc5322#section-2.2">
+        http://tools.ietf.org/html/rfc5322#section-2.2
+      </a>
+    </p>
+    <p>
+      For instance, a field body can contain multiple lines and space folding applies. In this example the description is one
+      logical line:
+    </p>
+    <pre>
+description: This is a long description for a
+  software component that spans multiple lines with arbitrary line breaks.
+     </pre>
+
+    <h3>
+      Referencing the file or folder documented by an ABOUT file.
+    </h3>
+    <p>
+      An ABOUT file documents one file or folder. By convention, an ABOUT file is stored in the same folder as the file or folder it documents.
+      An ABOUT file is named after the file or folder it documents adding a &quot;.ABOUT&quot; extension.
+    </p>
+    <p>
+      For instance:
+    </p>
+    <ul>
+    <li>
+      a file named linux-3.7-rc7.tar.bz2.ABOUT provides documentation about the linux-3.7-rc7.tar.bz2 file
+      stored in the same folder.
+    </li>
+    <li>
+      a file named nodejs.ABOUT provides documentation about the nodejs folder stored side by side with the
+      nodejs.ABOUT file.
+    </li>
+    </ul>
+    <p>
+      Alternatively an ABOUT file may contain the &quot;about_file&quot; field that contains a POSIX path to the file it
+      documents. This path is relative to the path of the ABOUT file.
+    </p>
+    <p>
+      For instance, a file named django.ABOUT may contain the following field to provide documentation about the
+      django-1.2.3.tar.gz file stored in the same folder:
+    </p>
+    <pre>
+      about_file: django-1.2.3.tar.gz
+    </pre>
+    <p>
+      The about_file field is optional and if present, it takes precedence over a file possibly pointed to by the ABOUT
+      file name itself. This field can appear only once.
+    </p>
+
+    <h3>
+      Fields validation
+    </h3>
+    <p>
+      When a tool processes an ABOUT file it must produce a warning or error if a field is invalid. A field can be
+      invalid for several reason such as an invalid syntax or an invalid content. Tools should report details on the
+      nature of the error. The validation process should check that each field name and values are syntactically correct
+      and contain correct values according to its (terse but common sense) definition in this specification. Certain
+      fields may be used for additional specific validations (such as extensions for checksums verification, URL
+      validity, path pointing to an existing text file, etc). Ignored fields should trigger a warning.
+    </p>
+    <p>
+      The field order does not matter with the following exception: multiple occurrences of a field name are possible and
+      must be interpreted such that only the last occurrence is considered as the value for this field name. Previous
+      occurrences must be treated as ignored fields.
+    </p>
+    <p>
+      Tools processing an ABOUT file must issue a warning when a field name occurs more than once in an ABOUT file (as
+      for any other ignored field).
+    </p>
+
+    <h3>
+      Fields referencing files and URLs
+    </h3>
+    <p>
+      The body of a field may be contained in another file. In this case the field name is suffixed with
+      &quot;_file&quot; and the field body must be a POSIX path to the file that contains the body of the field. This
+      path must be relative to the path of the ABOUT file.
+    </p>
+    <p>
+      For instance the full license text for a component is often stored in a separate file named COPYING:
+    </p>
+    <pre>
+      license_text_file: COPYING
+    </pre>
+    <p>
+      The body of a field may reference URLs such as a homepage or a download. In this case the field name is suffixed
+      with &quot;_url&quot; and the field body must be a valid absolute URL. For instance the download URL is
+      referenced this way:
+    </p>
+    <pre>
+      download_url: http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.4.20.tar.bz2
+    </pre>
+
+    <h3>
+      Fields referencing files inside archives
+    </h2>
+    <p>
+      To document files stored in an existing archive without needing to modify this archive, file-related fields can
+      point to files stored inside an archive. (Suffixed fields with &quot;_file&quot;). The field body is a POSIX
+      path to the archive file and the path to the file inside the archive. To address the file inside an archive, use
+      the path as listed by the extracting tool commonly used to extract this archive type. This type of reference can
+      be used for any &quot;_file&quot;-suffixed field, including the &quot;about_file&quot; field.
+    </p>
+    <p>
+      For instance compressed Tar archives are commonly extracted with GNU Tar and the archive file listing is obtained
+      this way:
+    </p>
+    <pre>
+      $ tar -tzf httpd-2.4.3.tar.gz
+      httpd-2.4.3/
+      httpd-2.4.3/CHANGES
+      httpd-2.4.3/httpd.dsp
+      httpd-2.4.3/LICENSE
+      httpd-2.4.3/Makefile.in
+      httpd-2.4.3/NOTICE
+      httpd-2.4.3/README
+      .....
+    </pre>
+    <p>
+      Here the ABOUT file httpd-2.4.3.tar.gz.ABOUT could contain these fields to reference the existing LICENSE and
+      NOTICE files provided in the archive:
+    </p>
+    <pre>
+      license_text_file: httpd-2.4.3.tar.gz/httpd-2.4.3/LICENSE
+      notice_file: httpd-2.4.3.tar.gz/httpd-2.4.3/NOTICE
+    </pre>
+
+    <h3>
+      Mandatory fields
+    </h3>
+    <p>
+      When a tool processes an ABOUT file it must issue an error if these fields are missing.
+    </p>
+    <ul>
+    <li>
+      name: The name for the component
+    </li>
+    <li>
+      version: The component version. Most components have a version. A version identifier can be a revision or
+      hash from a version control system (for a snapshot checked out from SCMs such as Subversion or Git). If not
+      available, the version should be the date the component was provisioned in ISO-like format as 'YYYY-MM-DD'.
+    </li>
+    </ul>
+
+
+    <h3>
+      Optional Information fields
+    </h3>
+    <ul>
+    <li>
+      about_format: This defines the ABOUT file format specification used and is provided as hint to readers and
+      tools in order to support future versions of this specification. Default value is 1.0 if omitted.
+    </li>
+    <li>
+      date: the date when this ABOUT file was created or when the fields values were valid (for instance the
+      date when URLs were valid)
+    </li>
+    <li>
+      description: A description for this component.
+    </li>
+    <li>
+      home_url: URL to the homepage for this component.
+    </li>
+    <li>
+      download_url: A direct URL to download the original file documented by this ABOUT file.
+    </li>
+    <li>
+      readme: Readme information for this component. You may use readme_file when this is a long text or a
+      pre-existing file as README files are commonly found in code archives.
+    </li>
+    <li>
+      install: Installation information for this component. You may use install_file when this is a long text or
+      a pre-existing file as INSTALL files are commonly found in code archives.
+    </li>
+    <li>
+      changelog: Changelog text for this component. You may use changelog_file when this is a long text or a
+      pre-existing file as CHANGELOG files are commonly found in code archives.
+    </li>
+    <li>
+      news: News text for this component. You may use news_file when this is a long text or a pre-existing file
+      as NEWS files are commonly found in code archives. You may use news_url to point to an internet news feed for this
+      component.
+    </li>
+    <li>
+      notes: Your notes and comments about this component.
+    </li>
+    <li>
+      usage: Describe the intended usage for this component. Possible values are limited to &quot;internal,
+      product and tool&quot; each with the following definitions:
+      <ul>
+	    <li>
+	      internal: used only internally, not part of the distributed software that uses this component.
+	    </li>
+	    <li>
+	      product: used in the distributed software.
+	    </li>
+	    <li>
+	      tool: tool used for development, not part of the distributed software.
+	    </li>
+	  </ul>
+    </li>
+    </ul>
+
+    <h3>
+      Optional authors and licensing fields
+    </h3>
+
+    <ul>
+    <li>
+      contact: Contact information (such as an email address or physical address) for the component providers.
+    </li>
+    <li>
+      organization: The name of the primary organizations or persons that authored or provided this component.
+    </li>
+    <li>
+      copyright: Copyright statement for this component. You may use copyright_file when this is a long text or
+      to reference a pre-existing file. For instance COPYRIGHT files are commonly found in code archives.
+    </li>
+    <li>
+      notice: Text containing a legal notice for this component. You may use notice_file when this is a long
+      text or to reference a pre-existing file. For instance NOTICE files are commonly found in code archives.
+    </li>
+    <li>
+      notice_url: URL to a legal notice for this component.
+    </li>
+    <li>
+      license_text: License text for this component. You may use license_text_file when this is a long text or
+      to reference a pre-existing file. For instance LICENSE or COPYING files are commonly found in code archives.
+    </li>
+    <li>
+      license_url: URL to the license text for this component.
+    </li>
+    <li>
+      license_spdx: The SPDX license short form identifiers for the license of this component. See
+      <a href="http://spdx.org/licenses/">
+        http://spdx.org/licenses/
+      </a>
+      for details. You can separate each identifier with an &quot; or &quot; and &quot; and &quot; as defined in the
+      SPDX specification 1.1 to document the relationship between multiple license identifiers, such as a choice of
+      license.
+    </li>
+    <li>
+      redistribute_sources: yes or no. Defaults to no if not present. Describes if this component license
+      requires redistribution in source form.
+    </li>
+    </ul>
+
+    <h3>
+      Optional Extension fields
+    </h3>
+    <p>
+      You can create extension fields by prefixing them with a short acronym to distinguish these from the standard
+      fields. You should provide documentation for these extensions and create or extend existing tools to support
+      these extensions. Other tools will ignore these extensions.
+    </p>
+    <p>
+      Some basic extensions are provided here too.
+    </p>
+
+
+    <h3>
+      Optional Extension fields to reference files stored in version control system
+    </h3>
+    <p>
+      These fields provide a simple way to reference files stored in versions control system. There is a large number
+      of version control tools such as CVS, Subversion, Git, ClearCase or GNU Arch and addressing accurately a file or
+      folder revision in each of these tool in a uniform way is not an easy task. Some tool may require access control
+      with user/password or certificates and typically this information should not be stored in the ABOUT files. The
+      proposed approach is to define the &quot;scm_&quot; extension prefix and a few common fields to handle the
+      diversity of SCM tools ways to reference files:
+    </p>
+    <ul>
+    <li>
+      scm_tool: SCM tool such as git, svn, cvs, etc.
+    </li>
+    <li>
+      scm_repository: Typically a URL or some other identifier used by the tool to point to a repository, folder
+      or file, such as an SVN or Git repository URL.
+    </li>
+    <li>
+      scm_path: Path to a file, folder or module used by certain SCM pointing inside a repository.
+    </li>
+    <li>
+      scm_tag: tag name or path used by certain SCM.
+    </li>
+    <li>
+      scm_branch: branch name or path used by certain SCM.
+    </li>
+    <li>
+      scm_rev: revision identifier such as a revision hash or version number.
+    </li>
+    </ul>
+    <p>
+      Some examples:
+    </p>
+    <pre>
+      scm_tool: svn
+      scm_url: http://svn.code.sf.net/p/inkscape/code/inkscape_project/trunk/inkscape_planet/
+      scm_rev: 22886
+    </pre>
+    <p>
+      or
+    </p>
+    <pre>
+      scm_tool: git
+      scm_repository: git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
+      scm_path: tools/lib/traceevent
+      scm_rev: b59958d90b3e75a3b66cd311661535f94f5be4d1
+    </pre>
+
+
+    <h3>
+      Optional Extension fields for checksums and digital signature
+    </h3>
+    <p>
+      These fields support checksums (such as SHA1) and signatures (such as GPG) commonly provided with downloadable
+      archives to verify their integrity. Tools could optionally use these to verify the integrity of a file documented
+      by an ABOUT file.
+    </p>
+    <p>
+      The approach is to define the &quot;checksum_&quot; and &quot;signature_&quot; extensions prefix padded with
+      an identifier for each type of signature or checksum such as in &quot;scm_sha1&quot;.
+    </p>
+    <ul>
+    <li>
+      signature_&lt;tool id&gt;: Signature for the documented for the file documented by this ABOUT file. You
+      may use signature_&lt;tool id&gt;_file to reference a pre-existing file as these signature files for GPG and PGP
+      are commonly provided for verifying code archives such as here:
+      <a href="http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.1.7.tar.sign">
+        http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.1.7.tar.sign
+      </a>
+    </li>
+    <li>
+      checksum_sha1, checksum_md5, checksum_sha256: Checksum for the file documented by this ABOUT file. The
+      suffix defines the checksum algorithm type such as &quot;_md5&quot;, &quot;_sha1&quot;, &quot;_sha256&quot;. The
+      checksum algorithms and formats are as defined in the GNU Coreutils tools md5sum, sha1sum and sha256sum commands (
+      <a href="http://www.gnu.org/software/coreutils/">
+        http://www.gnu.org/software/coreutils/
+      </a>
+      ) that follow the specifications defined in the FIPS-180-2 standard (
+      <a href="http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf">
+        http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf
+      </a>
+      ). Files can be referenced with the &quot;_file&quot; suffix such as with &quot;checksum_sha1_file&quot; to
+      reference checksums files commonly provided such as here:
+      <a href="http://mirrors.ibiblio.org/maven2/org/jdom/jdom/1.1.2/jdom-1.1.2-javadoc.jar.md5">
+        http://mirrors.ibiblio.org/maven2/org/jdom/jdom/1.1.2/jdom-1.1.2-javadoc.jar.md5
+      </a>
+    </li>
+    </ul>
+
+    <p>
+      Some examples:
+    </p>
+    <pre>
+      signature_gpg_file: linux-3.1.7.tar.sign
+      checksum_sha1: 87aaf7bc7e8715f0455997bb8c6791aa
+    </pre>
+    
+    
+    <h3>
+      Optional Extension fields for DejaCode
+    </h3>
+    <p>
+      These fields allow referencing DejaCode Enterprise objects with their URNs.
+    </p>
+    <ul>
+    <li>
+      dje_component: The DejaCode Enterprise URN for this component.
+    </li>
+    <li>
+      dje_license: The DejaCode Enterprise URNs of the licenses for this component.
+    </li>
+    <li>
+      dje_organization: The DejaCode Enterprise URN for this component organization.
+    </li>
+    </ul>
+
+
+        <div id="disqus_thread" >
+          <script type="text/javascript">
+                var disqus_developer = 1; // developer mode is on
+                var disqus_shortname = 'dejacode'; 
+                /* * * DON'T EDIT BELOW THIS LINE * * */
+                (function() {
+                    var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+                    dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+                    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+                })();
+          </script>
+          <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+          <a href="http://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
+        </div>
+
+    </div>
+    <!-- End Main Content -->
+
+
+
+    <!-- Sidebar -->
+
+    <aside class="three columns">
+      <div class="panel">
+        <h5>Android Case Study</h5>
+        <p>The Android Open Source Project re-uses a large number of third-party software components under several different licenses (typically Open Source Initiative-approved licenses).</p>
+        <a href="android_case_study.html">Read More &rarr;</a>
+      </div>
+
+    </aside>
+
+    <!-- End Sidebar -->
+  </div>
+
+  <!-- End Main Content and Sidebar -->
+
+
+  <!-- Footer -->
+
+  <footer class="row">
+    <div class="twelve columns">
+      <hr />
+      <div class="row">
+        <div class="six columns">
+          <p><a href="http://www.nexb.com" target="_blank">&copy; 2012 nexB, Inc.</a></p>
+        </div>
+        <div class="six columns">
+          <ul class="link-list right">
+            <li style="margin-left: 8px;"><a href="http://www.facebook.com/pages/nexB/113981918705301?sk=wall"><img src="images/fc-webicon-facebook-s.png" alt="nexB Facebook"/></a></li>
+            <li style="margin-left: 8px;"><a href="http://twitter.com/#!/dejacode"><img src="images/fc-webicon-twitter-s.png" alt="@dejacode"/></a></li>
+            <li style="margin-left: 8px;"><a href="http://www.linkedin.com/company/nexb"><img src="images/fc-webicon-linkedin-s.png" alt="nexB Linked In"/></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- End Footer -->
+
+  <!-- Included JS Files (Uncompressed) -->
+  <!--
+  
+  <script src="javascripts/jquery.js"></script>
+  
+  <script src="javascripts/jquery.foundation.mediaQueryToggle.js"></script>
+  
+  <script src="javascripts/jquery.foundation.forms.js"></script>
+  
+  <script src="javascripts/jquery.foundation.reveal.js"></script>
+  
+  <script src="javascripts/jquery.foundation.orbit.js"></script>
+  
+  <script src="javascripts/jquery.foundation.navigation.js"></script>
+  
+  <script src="javascripts/jquery.foundation.buttons.js"></script>
+  
+  <script src="javascripts/jquery.foundation.tabs.js"></script>
+  
+  <script src="javascripts/jquery.foundation.tooltips.js"></script>
+  
+  <script src="javascripts/jquery.foundation.accordion.js"></script>
+  
+  <script src="javascripts/jquery.placeholder.js"></script>
+  
+  <script src="javascripts/jquery.foundation.alerts.js"></script>
+  
+  <script src="javascripts/jquery.foundation.topbar.js"></script>
+  
+  <script src="javascripts/jquery.foundation.joyride.js"></script>
+  
+  <script src="javascripts/jquery.foundation.clearing.js"></script>
+  
+  <script src="javascripts/jquery.foundation.magellan.js"></script>
+  
+  -->
+  
+  <!-- Included JS Files (Compressed) -->
+  <script src="javascripts/jquery.js"></script>
+  <script src="javascripts/foundation.min.js"></script>
+  
+  <!-- Initialize JS Plugins -->
+  <script src="javascripts/app.js"></script>
+  
+</body>
+</html>
