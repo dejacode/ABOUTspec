@@ -1,0 +1,18 @@
+about_resource: .
+
+name: ABOUT File specification
+version: 0.8.1
+
+owner: nexB Inc.
+
+home_url: http://dejacode.org
+
+vcs_tool: git
+vcs_repository: https://github.com/dejacode/ABOUTspec.git
+
+dje_license: apache-2.0
+license_text_file: apache-2.0.LICENSE
+license_spdx: Apache-2.0
+copyright: Copyright (c) 2013-2014 nexB Inc.
+
+notice_file: NOTICE
