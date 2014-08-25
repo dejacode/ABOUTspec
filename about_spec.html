@@ -548,9 +548,9 @@ description: This is a long description for a
 
     <ul>
      <li>
-      checksum_sha1, checksum_md5, checksum_sha256, checksum_sha512:
+      checksum:
       Checksum for the file(s) documented by this ABOUT file in the &quot;about_resource&quot; field. One line per value.
-      The suffix defines the checksum algorithm such as &quot;_md5&quot;, &quot;_sha1&quot;, &quot;_sha256&quot;. The
+      The value prefix defines the checksum algorithm such as &quot;md5:&quot;, &quot;sha1:&quot;, &quot;sha256:&quot;. The
       checksum algorithms and formats are as defined in the GNU Coreutils tools md5sum, sha1sum and sha256sum commands (
       <a href="http://www.gnu.org/software/coreutils/">
         http://www.gnu.org/software/coreutils/
@@ -575,7 +575,7 @@ description: This is a long description for a
     </p>
     <pre>
       signature_file: signature/linux-3.1.7.tar.sign
-      checksum_md5: f30b9c173b1f19cf42ffa44f78e4b96c
+      checksum: md5:f30b9c173b1f19cf42ffa44f78e4b96c
     </pre>
 
 
