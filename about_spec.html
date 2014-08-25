@@ -11,8 +11,9 @@
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width" />
 
-  <title>ABOUT file specification v0.6.0</title>
-
+  <title>ABOUT file specification v0.6.1</title>
+  <meta name="Description" content="The purpose of an ABOUT file is to provide a simple way to document the provenance (origin and license) and other important or interesting information about a software component."/>
+  <meta name="keywords" content="DejaCode.org, automated compliance, ABOUT file, manage open source requirements, license requirements, DejaCode, document provenance, origin and license of software components, origin and license tools" />
   <!-- Included CSS Files (Uncompressed) -->
   <!--
   <link rel="stylesheet" href="stylesheets/foundation.css">
@@ -35,7 +36,7 @@
   <div class="row">
     <div class="twelve columns">
 
-      <h2>ABOUT File Specification v0.6.0</h2>
+      <h2>ABOUT File Specification v0.6.1</h2>
       <hr />
     </div>
   </div>
@@ -323,13 +324,13 @@ description: This is a long description for a
       usage: A concise description of the intended usage for the component. Suggested values include:
       <ul>
 	    <li>
-	      internal
+	      internal: Internal use only. Not part of the distributed software.
 	    </li>
 	    <li>
-	      product
+	      product: Deployed on the product. Used in the distributed software.
 	    </li>
 	    <li>
-	      tool
+	      tool: Development/testing tool. Not part of the distributed software. 
 	    </li>
 	  </ul>
     </li>
@@ -574,7 +575,7 @@ description: This is a long description for a
       <hr />
       <div class="row">
         <div class="six columns">
-          <p><a href="http://www.nexb.com" target="_blank">&copy; 2012 nexB, Inc.</a></p>
+          <p><a href="http://www.nexb.com" target="_blank">&copy; 2013 nexB, Inc.</a></p>
         </div>
         <div class="six columns">
           <ul class="link-list right">
