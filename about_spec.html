@@ -11,7 +11,7 @@
   <!-- Set the viewport width to device width for mobile -->
   <meta name="viewport" content="width=device-width" />
 
-  <title>ABOUT file specification v0.8.0</title>
+  <title>ABOUT file specification v0.8.1</title>
   <meta name="Description" content="The purpose of an ABOUT file is to provide a simple way to document the provenance (origin and license) and other important or interesting information about a software component."/>
   <meta name="keywords" content="DejaCode.org, automated compliance, ABOUT file, manage open source requirements, license requirements, DejaCode, document provenance, origin and license of software components, origin and license tools" />
   <!-- Included CSS Files (Uncompressed) -->
@@ -43,7 +43,7 @@
   <div class="row">
     <div class="twelve columns">
 
-      <h2>ABOUT File Specification v0.8.0</h2>
+      <h2>ABOUT File Specification v0.8.1</h2>
       <hr />
     </div>
   </div>
@@ -301,7 +301,7 @@ description: This is a long description for a
     </pre>
 
     <p>
-      In this example, the README file is stored in a doc directory, one directory above the ABOUT file directory, using a relative POSIC path:
+      In this example, the README file is stored in a doc directory, one directory above the ABOUT file directory, using a relative POSIX path:
     </p>
     <pre>
       license_text_file: ../docs/ruby.README
@@ -337,7 +337,7 @@ description: This is a long description for a
     <p>
       An ABOUT file documents one file or directory. The mandatory 
       &quot;about_resource&quot; field points to the documented file or directory.
-      The value of the &quot;about&quot; field can be a name stored in the same 
+      The value of the &quot;about_resource&quot; field can be a name stored in the same 
       directory as the ABOUT file 
       or a POSIX path relative to the path of the ABOUT file. 
       POSIX paths use a &quot;/&quot; forward slash sign as path separators. 
@@ -621,7 +621,7 @@ description: This is a long description for a
 
      <li>
       signature_gpg, signature_gpg_file, signature_pgp, signature_pgp_file: 
-      Signature or external signature file for the documented for the file documented by this ABOUT file in the &quot;about_resource&quot; field. 
+      Signature or external signature file for the file documented by this ABOUT file in the &quot;about_resource&quot; field. 
       Signature files for GPG and PGP are commonly provided to verify code archives integrity and provenance such as here:
       <a href="http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.1.7.tar.sign">
         http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.1.7.tar.sign
@@ -689,6 +689,9 @@ description: This is a long description for a
         Added details on file content and line endings.
         Added redistribute and attribute flags. Added author related fields.
     </li>
+    <li>
+        2013.08.08: Text clarifications and fixed typos.
+    </li>
 
     </ul>
 
@@ -717,8 +720,10 @@ description: This is a long description for a
     <aside class="three columns">
       <div class="panel">
         <h5><a href="https://github.com/dejacode/about-code-tool">Download the ABOUT Project</a></h5>
-        <h5><a href="about_spec_v0.8.0.html">Read the ABOUT specification</a></h5>
-        <h5><a href="android_case_study.html">Compliance Case Study </a></h5>
+        <h5><a href="about_spec_v0.8.1.html">Read the ABOUT specification</a></h5>
+        <h5><a href="android_case_study.html">Android Compliance Case Study </a></h5>
+        <h5><a href="healthcare_case_study.html">Healthcare.gov Case Study </a></h5>        
+        <h5><a href="index.html#nexb">Who are we?</a></h5>
       </div>
 
     </aside>
@@ -736,7 +741,7 @@ description: This is a long description for a
       <hr />
       <div class="row">
         <div class="six columns">
-          <p><a href="http://www.nexb.com" target="_blank">&copy; 2013 nexB, Inc.</a></p>
+          <p><a href="http://www.nexb.com" target="_blank">&copy; 2014 nexB, Inc.</a></p>
         </div>
         <div class="six columns">
           <ul class="link-list right">
