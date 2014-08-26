@@ -56,11 +56,12 @@ The meaning of this ABOUT file is:
 Specification
 -------------
 
-An ABOUT file is a text file with lines of colon-separated name:value pairs. 
-This format is loosely based on the Email header field
-format as specified in `RFC5322/RFC822 <http://tools.ietf.org/html/rfc5322>`_ 
+An ABOUT file is a text file with lines of colon-separated name:value pairs.
+This format is loosely based on the Email header field format as specified 
+in `RFC5322/RFC822 <http://tools.ietf.org/html/rfc5322>`_ .
 There are some differences though: for instance the text must be encoded as 
 UTF-8.
+
 
 ABOUT file name
 ~~~~~~~~~~~~~~~
