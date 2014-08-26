@@ -343,7 +343,7 @@ The checksum value is prefixed with a checksum algorithm name such as "md5:",
 defined in the `GNU Coreutils <http://www.gnu.org/software/coreutils/>`_ tools 
 md5sum, sha1sum and sha256sum commands. 
 When about_resource points to
-multiple paths, each checksum line correspond to the matching 
+multiple paths, each checksum line corresponds to the matching 
 about_resource line. Directories cannot have a checksum.
 
 For example::
