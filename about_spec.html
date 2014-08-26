@@ -174,10 +174,13 @@
       Field name
     </h3>
     <p>
+      A field must start with a uppercase and lowercase US-ASCII letter from A to Z.
       A field name can contain only these US-ASCII characters:
-      <li> digits from 0 to 9 </li>
-      <li> uppercase and lowercase letters from A to Z</li>
-      <li> the &quot;_&quot; underscore sign. </li>
+      <ul>
+       <li> digits from 0 to 9 </li>
+       <li> uppercase and lowercase letters from A to Z</li>
+       <li> the &quot;_&quot; underscore sign. </li>
+      </ul>
     </p>
     <p>
       Field names are not case sensitive. For example, &quot;HOME_URL&quot;
@@ -318,8 +321,8 @@ description: This is a long description for a
     </h3>
     <p>
       Flag fields have a &quot;true&quot; or &quot;false&quot; value.
-      True, T, 1, Yes or Y must be interpreted as &quot;true&quot; in any case combination.
-      False, F, 0, No or N must be interpreted as &quot;false&quot; in any case combination.
+      yes, y, true and t are True in any lower or upper case combination.
+      no, n, false and f are False in any lower or upper case combination..
     </p>
 
     <h3>
@@ -441,17 +444,22 @@ description: This is a long description for a
 
      <li>
       redistribute: Set this flag to yes if the component license requires source code redistribution.
-      Defaults to no when absent.
+      Defaults to No.
      </li>
 
      <li>
       attribute: Set this flag to yes if the component license requires publishing an attribution or credit notice.
-      Defaults to No when absent.
+      Defaults to No.
      </li>
 
      <li>
-      track_changes: Set this flag to yes if the component license requires tracking changes made to a the component.
-      Defaults to No when absent.
+      track_change: Set this flag to yes if the component license requires tracking changes made to a the component.
+      Defaults to No.
+     </li>
+
+     <li>
+      modified: Set this flag to yes if the component code has been modified.
+      Defaults to No.
      </li>
 
      <li>
@@ -474,7 +482,7 @@ description: This is a long description for a
      </li>
 
      <li>
-      notes: Notes and comments about the component or license.
+      notes: Notes and comments about the documented component or license.
      </li>
     </ul>
 
@@ -538,43 +546,22 @@ description: This is a long description for a
 
 
     <h3>
-      Checksums and digital signatures
+      checksum
     </h3>
     <p>
-      These fields support checksums (such as SHA1 and MD5) and signatures (such as GPG) used to verify file integrity.  
-      A tool can optionally use these to verify the integrity of a file documented
+      This field support checksums (such as SHA1 and MD5)used to verify file integrity.  
+      A tool can optionally use these to verify the integrity of file(s) documented
       by an ABOUT file.
-    </p>
-
-    <ul>
-     <li>
-      checksum:
-      Checksum for the file(s) documented by this ABOUT file in the &quot;about_resource&quot; field. One line per value.
-      The value prefix defines the checksum algorithm such as &quot;md5:&quot;, &quot;sha1:&quot;, &quot;sha256:&quot;. The
+      The value prefix is the checksum algorithm such as &quot;md5:&quot;, &quot;sha1:&quot;, &quot;sha256:&quot;. The
       checksum algorithms and formats are as defined in the GNU Coreutils tools md5sum, sha1sum and sha256sum commands (
       <a href="http://www.gnu.org/software/coreutils/">
         http://www.gnu.org/software/coreutils/
-      </a>) that follow the specifications defined in the FIPS-180-2 standard (
-      <a href="http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf">
-        http://csrc.nist.gov/publications/fips/fips180-2/fips180-2.pdf
-      </a>). 
-     <li>
-      signature_file: Sgnature file for the file(s) documented by this ABOUT file in the &quot;about_resource&quot; field.
-      Signature files for GPG and PGP are commonly provided to verify code archives integrity and provenance such as here:
-      <a href="http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.1.7.tar.sign">
-        http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.1.7.tar.sign
-      </a> or here:
-      <a href="http://archive.apache.org/dist/maven/plugins/maven-acr-plugin-1.0-source-release.zip.asc">
-        http://archive.apache.org/dist/maven/plugins/maven-acr-plugin-1.0-source-release.zip.asc
-       </a>
-     </li>
-    </ul>
-
+      </a>).  When about_resource points to multiple paths, each checksum line correspond
+      to an about_resource line. Directories cannot have a checksum.
     <p>
-      Some examples:
+      For example:
     </p>
     <pre>
-      signature_file: signature/linux-3.1.7.tar.sign
       checksum: md5:f30b9c173b1f19cf42ffa44f78e4b96c
     </pre>
 
