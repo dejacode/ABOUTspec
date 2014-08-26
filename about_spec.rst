@@ -58,7 +58,7 @@ Specification
 
 An ABOUT file is a text file with lines of colon-separated name:value pairs. 
 This format is loosely based on the Email header field
-format as specified in RFC5322/RFC822 at `http://tools.ietf.org/html/rfc5322`_ 
+format as specified in `RFC5322/RFC822 <http://tools.ietf.org/html/rfc5322>`_ 
 There are some differences though: for instance the text must be encoded as 
 UTF-8.
 
@@ -228,6 +228,7 @@ document the django-1.2.3.tar.gz archive stored in the same directory::
 
 In this example, the ABOUT file documents a whole sub-directory and a single
 file::
+
     about_resource: downloads/linux-kernel-2.6.23/
      downloads/include/linux/kernel.h
 
@@ -338,8 +339,9 @@ file with checksums.  This field support checksums (such as SHA1 and MD5)
 used to verify integrity of about_resource files. 
 The checksum value is prefixed with a checksum algorithm name such as "md5:",
 "sha1:", "sha256:". The checksum algorithms and formats are as
-defined in the GNU Coreutils tools md5sum, sha1sum and sha256sum commands 
-(`http://www.gnu.org/software/coreutils/`_). When about_resource points to
+defined in the `GNU Coreutils <http://www.gnu.org/software/coreutils/>`_ tools 
+md5sum, sha1sum and sha256sum commands. 
+When about_resource points to
 multiple paths, each checksum line correspond to the matching 
 about_resource line. Directories cannot have a checksum.
 
