@@ -23,9 +23,8 @@ of components.
 Getting Started
 ---------------
 
-A simple and valid ABOUT file named httpd.ABOUT may look like this:
+A simple and valid ABOUT file named httpd.ABOUT may look like this::
 
-::
     about_resource: httpd-2.4.3.tar.gz
     name: Apache HTTP Server
     version: 2.4.3
@@ -46,16 +45,16 @@ The meaning of this ABOUT file is:
     side-by-side with the ABOUT file "httpd.ABOUT" that documents it.
 -   The name of this component is "Apache HTTP Server" with version
     "2.4.3".
--   The home URL for this component is `http://httpd.apache.org`_
+-   The home URL for this component is http://httpd.apache.org
 -   The file "httpd-2.4.3.tar.gz" was originally downloaded from 
-    `http://archive.apache.org/dist/httpd/httpd-2.4.3.tar.gz`_
+    http://archive.apache.org/dist/httpd/httpd-2.4.3.tar.gz
 -   In the same directory, "httpd.LICENSE" and "NOTICE" are files that
     contain respectively the license text and the notice text for this
     component.
 
 
 Specification
-------------
+-------------
 
 An ABOUT file is a text file with lines of colon-separated name:value pairs. 
 This format is loosely based on the Email header field
@@ -68,6 +67,7 @@ ABOUT file name
 
 An ABOUT file has an ".ABOUT" extension. 
 A file name can contain only these US-ASCII characters:
+
 -   letters from A to Z
 -   digits from 0 to 9
 -   the "_" underscore, "-" dash and "." period signs.
@@ -100,6 +100,7 @@ Z. A field name can contain only these US-ASCII characters:
 -   the first character must be a letter from A to Z
 
 The other characters can be any of these:
+
 -   digits from 0 to 9
 -   letters from A to Z
 -   the "_" underscore sign.
@@ -127,9 +128,8 @@ When a field contains multiple lines of text, it may be specified either
 as a single value (for instance a description spanning multiple text lines) 
 or as a list of values (for instance multiple license file paths)
 
-In this example the value of the description field spans multiple lines:
+In this example the value of the description field spans multiple lines::
 
-::
     description: This is a long description for a
      software component that spans multiple lines with arbitrary line
      breaks.
@@ -184,17 +184,15 @@ relative to the path of the ABOUT file parent directory.
 Files content must be UTF-8-encoded text. To reference multiple
 files, set each file path on a new continuation line.
 
-For example, the license text is often stored in a file named COPYING:
+For example, the license text is often stored in a file named COPYING::
 
-::
-          license_file: COPYING
+    license_file: COPYING
 
 
 In this example, the license file is stored in a doc directory, one directory
-above the ABOUT file directory, using a relative path:
+above the ABOUT file directory, using a relative path::
 
-::
-          license_file: ../docs/ruby.LICENSE
+    license_file: ../docs/ruby.LICENSE
 
 Field referencing URLs
 ~~~~~~~~~~~~~~~~~~~~~~
@@ -202,10 +200,9 @@ Field referencing URLs
 A field may reference URLs such as a homepage or a download URL. In
 this case the field name is suffixed with "_url" and the field must contain
 a valid absolute URL. To reference multiple URLs, set each URLs on a new
-continuation line. For example, a download URL is referenced this way:
+continuation line. For example, a download URL is referenced this way::
 
-::
-          download_url: http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.4.20.tar.bz2
+    download_url: http://www.kernel.org/pub/linux/kernel/v3.0/linux-3.4.20.tar.bz2
 
 Flag fields
 ~~~~~~~~~~~
@@ -215,9 +212,8 @@ any lower or upper case combination. No, n, false and f are False in any
 lower or upper case combination.
 
 
-
 Referencing the resources (files or directories) documented by an ABOUT file
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 The about_resource field is used to reference one or more files or
 directories documented in an ABOUT file. This field contains one value per
@@ -226,31 +222,23 @@ file parent directory. Paths must use POSIX paths "/" forward slash as
 path separators.
 
 For example, a file named django.ABOUT contains the following field to
-document the django-1.2.3.tar.gz archive stored in the same directory:
+document the django-1.2.3.tar.gz archive stored in the same directory::
 
-::
-          about_resource: django-1.2.3.tar.gz
-
+    about_resource: django-1.2.3.tar.gz
 
 In this example, the ABOUT file documents a whole sub-directory and a single
-file:
+file::
+    about_resource: downloads/linux-kernel-2.6.23/
+     downloads/include/linux/kernel.h
 
-::
-          about_resource: downloads/linux-kernel-2.6.23/
-           include/linux/kernel.h
+Use a "." period to reference the current whole directory::
 
-
-Use a "." period to reference the current whole directory:
-
-::
-          about_resource: .
-
+    about_resource: .
 
 All paths are interpreted relative to the ABOUT file location therefore, /
-also references the current directory:
+also references the current directory::
 
-::
-          about_resource: /
+    about_resource: /
 
 Origin fields
 ~~~~~~~~~~~~~
@@ -298,7 +286,7 @@ These fields document the license of a Component:
 
 
 Miscellaneous fields
- ~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~
 
 -   spec_version: The version of the ABOUT file format specification used
     for this file as a hint to readers and tools in order to support future
@@ -315,9 +303,8 @@ control system. There are many VCS tools such as Git, Mercurial, Subversion,
 CVS, etc. Accurate addressing of a file or directory revision in each tool in
 a uniform way may not be possible. Some tools may require access control via
 user/password or certificate and this information should not be stored in an
-ABOUT file. This extension defines the "vcs_" field extension prefix and a
-few common fields to handle the diversity of ways that VCS tools reference
-files and directories under version control:
+ABOUT file. These fields allow handle the diversity of ways that VCS tools 
+reference files and directories under version control:
 
 -   vcs_tool: VCS tool such as git, svn, cvs, etc.
 -   vcs_repository: A repository URL or identifier to point to a
@@ -329,21 +316,19 @@ files and directories under version control:
 -   vcs_tag: Version tag used by the VCS tool.
 -   vcs_branch: Branch name used by the VCS tool.
 
-Some examples for using the vcs_* extension fields include:
+Some examples for using the vcs extension fields include::
 
-::
-          vcs_tool: git
-          vcs_repository: git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
-          vcs_path: tools/lib/traceevent
-          vcs_revision: b59958d90b3e75a3b66cd311661535f94f5be4d1
+    vcs_tool: git
+    vcs_repository: git://git.kernel.org/pub/scm/linux/kernel/git/stable/linux-stable.git
+    vcs_path: tools/lib/traceevent
+    vcs_revision: b59958d90b3e75a3b66cd311661535f94f5be4d1
 
-or
+or::
 
-::
-          vcs_tool: svn
-          vcs_repository: http://svn.code.sf.net/p/inkscape/code/inkscape_project/
-          vcs_path: trunk/inkscape_planet/
-          vcs_revision: 22886
+    vcs_tool: svn
+    vcs_repository: http://svn.code.sf.net/p/inkscape/code/inkscape_project/
+    vcs_path: trunk/inkscape_planet/
+    vcs_revision: 22886
 
 checksum
 ~~~~~~~~
@@ -358,10 +343,9 @@ defined in the GNU Coreutils tools md5sum, sha1sum and sha256sum commands
 multiple paths, each checksum line correspond to the matching 
 about_resource line. Directories cannot have a checksum.
 
-For example:
+For example::
 
-::
-          checksum: md5:f30b9c173b1f19cf42ffa44f78e4b96c
+    checksum: md5:f30b9c173b1f19cf42ffa44f78e4b96c
 
 Changes
 ~~~~~~~~~~~~~~~~~~~
